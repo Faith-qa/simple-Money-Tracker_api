@@ -12,53 +12,55 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreditService = void 0;
+exports.DebitService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-let CreditService = class CreditService {
-    constructor(creditModel, walletModel, userModel) {
-        this.creditModel = creditModel;
+let DebitService = class DebitService {
+    constructor(debitModel, walletModel, userModel) {
+        this.debitModel = debitModel;
         this.walletModel = walletModel;
         this.userModel = userModel;
     }
-    async createcredit(credit, walletid) {
+    async createdDebit(debit, walletid) {
         const wallet = await this.walletModel.findById({ _id: walletid });
         if (!wallet) {
             throw new common_1.HttpException(`wallet id ${walletid} does not exist`, common_1.HttpStatus.NOT_FOUND);
         }
         try {
-            const newCredit = new this.creditModel(Object.assign({ wallet: wallet._id }, credit));
-            const savedCredit = await newCredit.save();
-            wallet.Credit.push({ creditid: savedCredit._id, creditAmount: -savedCredit.credit_amount });
-            wallet.Total -= savedCredit.credit_amount;
+            const newDebit = new this.debitModel(Object.assign({ wallet: wallet._id }, debit));
+            const savedDebit = await newDebit.save();
+            wallet.Debit.push({ debitid: savedDebit._id, debitAmount: savedDebit.debit_amount });
+            wallet.Total += savedDebit.debit_amount;
             await wallet.save();
+            console.log('I MADE IT');
+            console.log(wallet.Total);
             const user = await this.userModel.findById({ _id: wallet.user });
             if (!user) {
                 throw new common_1.HttpException(`User with id ${wallet.user} not found`, common_1.HttpStatus.NOT_FOUND);
             }
-            const userWallet = await user.wallets.find(w => w.walletId.toString() === wallet._id.toString());
+            const userWallet = user.wallets.find(w => w.walletId.toString() === wallet._id.toString());
             if (!userWallet) {
                 throw new common_1.HttpException(`Wallet with id ${wallet._id} not found in user's wallets`, common_1.HttpStatus.NOT_FOUND);
             }
             userWallet.walletTotal = wallet.Total;
             user.Accountbalance = user.wallets.reduce((sum, w) => sum + w.walletTotal, 0);
             await user.save();
-            return savedCredit;
+            return savedDebit;
         }
         catch (err) {
             console.log(err);
         }
     }
 };
-CreditService = __decorate([
+DebitService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('Credit')),
+    __param(0, (0, mongoose_1.InjectModel)('Debit')),
     __param(1, (0, mongoose_1.InjectModel)('Wallet')),
     __param(2, (0, mongoose_1.InjectModel)('User')),
     __metadata("design:paramtypes", [mongoose_2.Model,
         mongoose_2.Model,
         mongoose_2.Model])
-], CreditService);
-exports.CreditService = CreditService;
-//# sourceMappingURL=credit.service.js.map
+], DebitService);
+exports.DebitService = DebitService;
+//# sourceMappingURL=debit.service.js.map

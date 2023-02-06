@@ -15,15 +15,20 @@ import { CreditController } from './credit/credit.controller';
 import { CreditModule } from './credit/credit.module';
 import { CreditSchema } from './schemas/credit.schema';
 import { CreditService } from './credit/credit.service';
+import { DebitController } from './debit/debit.controller';
+import { DebitModule } from './debit/debit.module';
+import { DebitSchema } from './schemas/debit.schemas';
+import { DebitService } from './debit/debit.service';
 
 @Module({
   imports: [MongooseModule.forRoot(config.mongoURI), UsersModule, WalletsModule,MongooseModule.forFeature(
     [
-      {name: 'User', schema: UserSchema}, {
-      name: 'Wallet', schema: WalletSchema}, 
-      {name: 'Credit', schema: CreditSchema}
-    ]), WalletsModule, CreditModule],
-  controllers: [AppController, UsersController, WalletsController, CreditController],
-  providers: [AppService, UsersService, WalletsService, CreditService],
+      {name: 'User', schema: UserSchema}, 
+      {name: 'Wallet', schema: WalletSchema}, 
+      {name: 'Credit', schema: CreditSchema},
+      {name: 'Debit', schema: DebitSchema}
+    ]), WalletsModule, CreditModule, DebitModule],
+  controllers: [AppController, UsersController, WalletsController, CreditController, DebitController],
+  providers: [AppService, UsersService, WalletsService, CreditService, DebitService],
 })
 export class AppModule { }

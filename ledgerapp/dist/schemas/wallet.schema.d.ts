@@ -11,6 +11,9 @@ export declare const WalletSchema: mongoose.Schema<any, mongoose.Model<any, any,
         creditid?: mongoose.Types.ObjectId;
         creditAmount?: number;
     }[];
-    Debit: mongoose.Types.ObjectId[];
+    Debit: {
+        debitid?: mongoose.Types.ObjectId;
+        debitAmount?: number;
+    }[];
     Total: number;
 }>;

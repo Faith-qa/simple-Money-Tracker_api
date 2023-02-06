@@ -8,7 +8,12 @@ exports.WalletSchema = new mongoose.Schema({
         ref: 'User', required: true
     },
     walletname: { type: String, required: true, unique: true },
-    Debit: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Debit' }],
+    Debit: [
+        {
+            debitid: { type: mongoose.Schema.Types.ObjectId, ref: 'Credit' },
+            debitAmount: { type: Number }
+        }
+    ],
     Credit: [
         {
             creditid: { type: mongoose.Schema.Types.ObjectId, ref: 'Credit' },

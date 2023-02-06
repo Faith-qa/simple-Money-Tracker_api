@@ -3,6 +3,6 @@ export interface Wallet {
     user?: ObjectId;
     walletname: string;
     Credit?: [{}];
-    Debit?: [];
+    Debit?: [{}];
     Total?: number;
 }

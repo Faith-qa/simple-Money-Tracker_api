@@ -48,7 +48,7 @@ let WalletsService = class WalletsService {
         }
     }
     async listWalletsByUser(userid) {
-        return await this.walletModel.findOne({ user: userid });
+        return await this.walletModel.find({ user: userid });
     }
 };
 WalletsService = __decorate([

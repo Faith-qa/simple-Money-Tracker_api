@@ -61,7 +61,7 @@ export class WalletsService {
     // list wallets created by a particular user:
 
     async listWalletsByUser(userid: string): Promise<Wallet[]>{
-        return await this.walletModel.findOne({user: userid})
+        return await this.walletModel.find({user: userid})
     }
 
 }

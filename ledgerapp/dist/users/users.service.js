@@ -21,8 +21,13 @@ let UsersService = class UsersService {
         this.userModel = userModel;
     }
     async create(user) {
-        const newUser = new this.userModel(user);
-        return await newUser.save();
+        try {
+            const newUser = new this.userModel(user);
+            return await newUser.save();
+        }
+        catch (err) {
+            throw new common_1.HttpException('user with that email exists', common_1.HttpStatus.BAD_REQUEST);
+        }
     }
     async findAll() {
         return await this.userModel.find();

@@ -17,14 +17,14 @@ export class WalletsService {
     async createWallet( wallet: Wallet, userid: string): Promise<Wallet>{
         //check if the user exists
         //const uid = new mongoose.Types.ObjectId(userid)
-        var user = await this.userModel.findOne({userid});
+        var user = await this.userModel.findById({_id: userid});
                 
 
-        //console.log('hello', user)
         if (!user) {
-            throw new Error(`User with id ${userid} not found`);
+            throw new HttpException(`user with id ${userid} not found`, HttpStatus.NOT_FOUND )
         }
 
+        // create new wallet, and update the wallet section in the user schema
         try{
             const newWallet = new this.walletModel({
                 user: user._id,
@@ -52,10 +52,18 @@ export class WalletsService {
             console.log(updatedUser)
      
              return savedWallet;
+
         }catch(err){
             console.log(err);
             throw new HttpException('wallet exists', HttpStatus.BAD_REQUEST)
         }
 
     }
+
+    // list wallets created by a particular user:
+
+    async listWalletsByUser(userid: string): Promise<Wallet[]>{
+        return await this.walletModel.findOne({user: userid})
+    }
+
 }

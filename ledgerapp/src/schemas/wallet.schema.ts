@@ -7,9 +7,13 @@ export const WalletSchema = new mongoose.Schema({
 
     walletname: {type: String, required: true, unique: true},
     Debit: [{type: mongoose.Schema.Types.ObjectId, ref: 'Debit'}],
-    Credit: [{type: mongoose.Schema.Types.ObjectId, ref: 'Credit'}],
-    Total: Number,
-    created_date: {type: Date, default: Date.now()},
+    Credit: [
+        {
+            creditid: {type: mongoose.Schema.Types.ObjectId, ref: 'Credit'}, 
+            creditAmount:{type: Number}
+        }
+    ],
+    Total: {type: Number,default: 0},
 
 },
 {

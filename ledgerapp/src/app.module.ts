@@ -11,10 +11,19 @@ import { WalletsModule } from './wallets/wallets.module';
 import config from './config/keys'
 import { WalletSchema } from './schemas/wallet.schema';
 import { WalletsService } from './wallets/wallets.service';
+import { CreditController } from './credit/credit.controller';
+import { CreditModule } from './credit/credit.module';
+import { CreditSchema } from './schemas/credit.schema';
+import { CreditService } from './credit/credit.service';
 
 @Module({
-  imports: [MongooseModule.forRoot(config.mongoURI), UsersModule, WalletsModule, MongooseModule.forFeature([{name: 'User', schema: UserSchema}, {name: 'Wallet', schema: WalletSchema}]), WalletsModule],
-  controllers: [AppController, UsersController, WalletsController],
-  providers: [AppService, UsersService, WalletsService],
+  imports: [MongooseModule.forRoot(config.mongoURI), UsersModule, WalletsModule,MongooseModule.forFeature(
+    [
+      {name: 'User', schema: UserSchema}, {
+      name: 'Wallet', schema: WalletSchema}, 
+      {name: 'Credit', schema: CreditSchema}
+    ]), WalletsModule, CreditModule],
+  controllers: [AppController, UsersController, WalletsController, CreditController],
+  providers: [AppService, UsersService, WalletsService, CreditService],
 })
 export class AppModule { }

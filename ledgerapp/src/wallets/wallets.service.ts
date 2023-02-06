@@ -16,7 +16,6 @@ export class WalletsService {
 
     async createWallet( wallet: Wallet, userid: string): Promise<Wallet>{
         //check if the user exists
-        //const uid = new mongoose.Types.ObjectId(userid)
         var user = await this.userModel.findById({_id: userid});
                 
 
@@ -34,24 +33,23 @@ export class WalletsService {
             const savedWallet = await newWallet.save();
     
              // Retrieve the saved wallet from the database
-             const completeWallet = await this.walletModel.findById(savedWallet._id);
     
              
             
             // Update the user's wallets array with the new wallet
-        const updatedUser = await this.userModel.findOneAndUpdate({_id: userid}, {
-            $push: {
-                wallets: {
-                    walletId: savedWallet._id,
-                    walletName: savedWallet.walletname,
-                    walletTotal: savedWallet.total
+            const updatedUser = await this.userModel.findOneAndUpdate({_id: userid}, {
+                $push: {
+                    wallets: {
+                        walletId: savedWallet._id,
+                        walletName: savedWallet.walletname,
+                        walletTotal: savedWallet.Total
+                    }
                 }
-            }
-        }, { new: true });
-    
+            }, { new: true });
+        
             console.log(updatedUser)
-     
-             return savedWallet;
+    
+            return savedWallet;
 
         }catch(err){
             console.log(err);

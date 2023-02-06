@@ -15,6 +15,11 @@ export class WalletsController {
         
         return await this.service.createWallet(createWalletDto, userid)
     }
+    //get wallet based on userid
+    @Get(':userid')
+    async getWalletbyUser(@Param('userid') userid:string): Promise<Wallet[]>{
+        return await this.service.listWalletsByUser(userid)
+    }
 
 
 }

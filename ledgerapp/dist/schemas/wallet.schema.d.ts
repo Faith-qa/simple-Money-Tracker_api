@@ -7,8 +7,10 @@ export declare const WalletSchema: mongoose.Schema<any, mongoose.Model<any, any,
 } & {
     user: mongoose.Types.ObjectId;
     walletname: string;
+    Credit: {
+        creditid?: mongoose.Types.ObjectId;
+        creditAmount?: number;
+    }[];
     Debit: mongoose.Types.ObjectId[];
-    Credit: mongoose.Types.ObjectId[];
-    created_date: Date;
-    Total?: number;
+    Total: number;
 }>;

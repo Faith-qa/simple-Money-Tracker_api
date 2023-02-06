@@ -12,39 +12,29 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WalletsController = void 0;
+exports.CreditController = void 0;
 const common_1 = require("@nestjs/common");
-const create_wallet_dto_1 = require("../dto/create-wallet.dto");
-const wallets_service_1 = require("./wallets.service");
-let WalletsController = class WalletsController {
+const create_credit_dto_1 = require("../dto/create-credit.dto");
+const credit_service_1 = require("./credit.service");
+let CreditController = class CreditController {
     constructor(service) {
         this.service = service;
     }
-    async create(createWalletDto, userid) {
-        return await this.service.createWallet(createWalletDto, userid);
-    }
-    async getWalletbyUser(userid) {
-        return await this.service.listWalletsByUser(userid);
+    async createcredit(createCreditDto, walletid) {
+        return await this.service.createcredit(createCreditDto, walletid);
     }
 };
 __decorate([
-    (0, common_1.Post)(':userid'),
+    (0, common_1.Post)(':walletid'),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Param)('userid')),
+    __param(1, (0, common_1.Param)('walletid')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_wallet_dto_1.CreateWalletDto, String]),
+    __metadata("design:paramtypes", [create_credit_dto_1.CreateCreditDto, String]),
     __metadata("design:returntype", Promise)
-], WalletsController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(':userid'),
-    __param(0, (0, common_1.Param)('userid')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], WalletsController.prototype, "getWalletbyUser", null);
-WalletsController = __decorate([
-    (0, common_1.Controller)('wallets'),
-    __metadata("design:paramtypes", [wallets_service_1.WalletsService])
-], WalletsController);
-exports.WalletsController = WalletsController;
-//# sourceMappingURL=wallets.controller.js.map
+], CreditController.prototype, "createcredit", null);
+CreditController = __decorate([
+    (0, common_1.Controller)('credit'),
+    __metadata("design:paramtypes", [credit_service_1.CreditService])
+], CreditController);
+exports.CreditController = CreditController;
+//# sourceMappingURL=credit.controller.js.map

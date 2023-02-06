@@ -6,4 +6,5 @@ export declare class WalletsService {
     private userModel;
     constructor(walletModel: Model<Wallet>, userModel: Model<User>);
     createWallet(wallet: Wallet, userid: string): Promise<Wallet>;
+    listWalletsByUser(userid: string): Promise<Wallet[]>;
 }

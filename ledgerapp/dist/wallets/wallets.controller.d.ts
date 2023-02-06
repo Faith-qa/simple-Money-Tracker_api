@@ -5,4 +5,5 @@ export declare class WalletsController {
     private readonly service;
     constructor(service: WalletsService);
     create(createWalletDto: CreateWalletDto, userid: string): Promise<Wallet>;
+    getWalletbyUser(userid: string): Promise<Wallet[]>;
 }

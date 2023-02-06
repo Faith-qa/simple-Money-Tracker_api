@@ -26,6 +26,7 @@ let DebitController = class DebitController {
 };
 __decorate([
     (0, common_1.Post)(':walletid'),
+    (0, common_1.Header)('Content-Type', 'application/json'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('walletid')),
     __metadata("design:type", Function),

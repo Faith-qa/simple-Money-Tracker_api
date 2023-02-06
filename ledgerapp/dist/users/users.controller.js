@@ -33,6 +33,7 @@ let UsersController = class UsersController {
 };
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.Header)('Content-Type', 'application/json'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
@@ -40,12 +41,14 @@ __decorate([
 ], UsersController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, common_1.Header)('Content-Type', 'application/json'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getAll", null);
 __decorate([
     (0, common_1.Get)(':userid'),
+    (0, common_1.Header)('Content-Type', 'application/json'),
     __param(0, (0, common_1.Param)('userid')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

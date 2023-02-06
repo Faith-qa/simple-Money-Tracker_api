@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Header, Param, Post } from '@nestjs/common';
 import { CreateDebitDto } from 'src/dto/create-debit.dto';
 import { DebitService } from './debit.service';
 
@@ -10,6 +10,8 @@ export class DebitController {
     //create a credit
     
     @Post(':walletid')
+    @Header('Content-Type', 'application/json')
+
 
     async createcredit(@Body() createDebitDto: CreateDebitDto, @Param('walletid') walletid: string) {
         return await this.service.createdDebit(createDebitDto, walletid)

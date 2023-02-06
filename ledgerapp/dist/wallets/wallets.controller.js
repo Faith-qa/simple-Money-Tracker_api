@@ -29,6 +29,7 @@ let WalletsController = class WalletsController {
 };
 __decorate([
     (0, common_1.Post)(':userid'),
+    (0, common_1.Header)('Content-Type', 'application/json'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('userid')),
     __metadata("design:type", Function),
@@ -37,6 +38,7 @@ __decorate([
 ], WalletsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(':userid'),
+    (0, common_1.Header)('Content-Type', 'application/json'),
     __param(0, (0, common_1.Param)('userid')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

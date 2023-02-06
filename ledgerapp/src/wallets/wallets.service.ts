@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { User } from 'src/interfaces/user.interface';
@@ -25,46 +25,37 @@ export class WalletsService {
             throw new Error(`User with id ${userid} not found`);
         }
 
-        //wallet.user = user._id
-        console.log(wallet.walletname)
-        //check if the wallet exists
-        // const exists = await this.walletModel.findOne({walletname:  wallet.walletname})
-
-        // if (exists) {
-        //     throw new Error(`a wallet with that the name ${wallet.walletname} exists `)
-        // }
-
-        const newWallet = new this.walletModel({
-            user: user._id,
-            ...wallet
-        });
-
-        const savedWallet = await newWallet.save();
-
-         // Retrieve the saved wallet from the database
-         const completeWallet = await this.walletModel.findById(savedWallet._id);
-
-         // create updates
-
-        //  const updates = {
-        //     walletId: completeWallet._id,
-        //     walletName: completeWallet.walletname,
-        //  }
-
-        
-        // Update the user's wallets array with the new wallet
-    const updatedUser = await this.userModel.findOneAndUpdate({_id: userid}, {
-        $push: {
-            wallets: {
-                walletId: savedWallet._id,
-                walletName: savedWallet.walletname,
-                walletTotal: savedWallet.total
+        try{
+            const newWallet = new this.walletModel({
+                user: user._id,
+                ...wallet
+            });
+    
+            const savedWallet = await newWallet.save();
+    
+             // Retrieve the saved wallet from the database
+             const completeWallet = await this.walletModel.findById(savedWallet._id);
+    
+             
+            
+            // Update the user's wallets array with the new wallet
+        const updatedUser = await this.userModel.findOneAndUpdate({_id: userid}, {
+            $push: {
+                wallets: {
+                    walletId: savedWallet._id,
+                    walletName: savedWallet.walletname,
+                    walletTotal: savedWallet.total
+                }
             }
+        }, { new: true });
+    
+            console.log(updatedUser)
+     
+             return savedWallet;
+        }catch(err){
+            console.log(err);
+            throw new HttpException('wallet exists', HttpStatus.BAD_REQUEST)
         }
-    }, { new: true });
 
-        console.log(updatedUser)
- 
-         return savedWallet;
     }
 }

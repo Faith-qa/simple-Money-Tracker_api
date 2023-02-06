@@ -27,21 +27,26 @@ let WalletsService = class WalletsService {
         if (!user) {
             throw new Error(`User with id ${userid} not found`);
         }
-        console.log(wallet.walletname);
-        const newWallet = new this.walletModel(Object.assign({ user: user._id }, wallet));
-        const savedWallet = await newWallet.save();
-        const completeWallet = await this.walletModel.findById(savedWallet._id);
-        const updatedUser = await this.userModel.findOneAndUpdate({ _id: userid }, {
-            $push: {
-                wallets: {
-                    walletId: savedWallet._id,
-                    walletName: savedWallet.walletname,
-                    walletTotal: savedWallet.total
+        try {
+            const newWallet = new this.walletModel(Object.assign({ user: user._id }, wallet));
+            const savedWallet = await newWallet.save();
+            const completeWallet = await this.walletModel.findById(savedWallet._id);
+            const updatedUser = await this.userModel.findOneAndUpdate({ _id: userid }, {
+                $push: {
+                    wallets: {
+                        walletId: savedWallet._id,
+                        walletName: savedWallet.walletname,
+                        walletTotal: savedWallet.total
+                    }
                 }
-            }
-        }, { new: true });
-        console.log(updatedUser);
-        return savedWallet;
+            }, { new: true });
+            console.log(updatedUser);
+            return savedWallet;
+        }
+        catch (err) {
+            console.log(err);
+            throw new common_1.HttpException('wallet exists', common_1.HttpStatus.BAD_REQUEST);
+        }
     }
 };
 WalletsService = __decorate([

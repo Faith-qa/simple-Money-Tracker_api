@@ -27,6 +27,9 @@ let UsersController = class UsersController {
     async getAll() {
         return await this.service.findAll();
     }
+    async getProfile(userid) {
+        return await this.service.findOne(userid);
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -41,6 +44,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getAll", null);
+__decorate([
+    (0, common_1.Get)(':userid'),
+    __param(0, (0, common_1.Param)('userid')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getProfile", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

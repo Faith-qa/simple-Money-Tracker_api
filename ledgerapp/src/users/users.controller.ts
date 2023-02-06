@@ -21,5 +21,12 @@ export class UsersController {
         return await this.service.findAll();
     }
 
+    @Get(':userid')
+    //get a user profile
+    async getProfile(@Param('userid') userid:string){
+        return await this.service.findOne(userid)
+    }
+
+
     
 }

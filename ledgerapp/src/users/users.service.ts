@@ -28,8 +28,8 @@ export class UsersService {
     }
 
     // list one user
-    async findOne(email: string): Promise<User> {
-        return await this.userModel.findOne({email})
+    async findOne(userid: string): Promise<User> {
+        return await this.userModel.findOne({userid})
     }
 
 }

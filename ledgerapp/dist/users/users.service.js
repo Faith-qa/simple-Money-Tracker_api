@@ -32,8 +32,8 @@ let UsersService = class UsersService {
     async findAll() {
         return await this.userModel.find();
     }
-    async findOne(email) {
-        return await this.userModel.findOne({ email });
+    async findOne(userid) {
+        return await this.userModel.findOne({ userid });
     }
 };
 UsersService = __decorate([

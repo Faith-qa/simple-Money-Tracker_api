@@ -2,6 +2,11 @@
 
 This a simple money tracker for users. Money can be tracked in multiple wallets (accounts), for example, if a user has multiple businesses. When a user's profile is pulled up, it should show a overall balance and all their wallets (accounts) and their respective balances. Drilling down into each wallet (account), should show the detailed transactions of that wallet (account).
 
+Technologies used are:
+1. Nestjs
+2. Mongodb
+3. Typescript
+
 
 ## Installation and set-up
 
@@ -308,10 +313,8 @@ curl --location --request GET 'http://localhost: 3000/users/' \
 ]
 ```
 
-### NB data passed in the examples above are are test data from a test database
 
 
 
 ## License
-
 Information on the license under which the API is released.

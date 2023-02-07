@@ -2,7 +2,7 @@
 
 This a simple money tracker for users. Money can be tracked in multiple wallets (accounts), for example, if a user has multiple businesses. When a user's profile is pulled up, it should show a overall balance and all their wallets (accounts) and their respective balances. Drilling down into each wallet (account), should show the detailed transactions of that wallet (account).
 
-## KEY TERMINOLOGIES IN THE CODE:
+## Key Terminologies used in the code:
 1. credit:- expense
 2. debit:- income
 

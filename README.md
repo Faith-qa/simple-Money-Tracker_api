@@ -2,7 +2,11 @@
 
 This a simple money tracker for users. Money can be tracked in multiple wallets (accounts), for example, if a user has multiple businesses. When a user's profile is pulled up, it should show a overall balance and all their wallets (accounts) and their respective balances. Drilling down into each wallet (account), should show the detailed transactions of that wallet (account).
 
-Technologies used are:
+## KEY TERMINOLOGIES IN THE CODE:
+1. credit:- expense
+2. debit:- income
+
+## Technologies used are:
 1. Nestjs
 2. Mongodb
 3. Typescript
